@@ -29,3 +29,13 @@ Yerel iki otomasyon tanımından kişisel ad, e-posta, ayrıntılı aday geçmi�
 ## Lisans
 
 MIT. Ayrıntı: `LICENSE`.
+
+## ChatGPT üzerinde kullanım ve takip hafızası
+
+Sistem ChatGPT görevleri olarak çalışır; depoda durum dosyası yoktur. 10.00 görevi hafıza olarak Gmail SENT'teki önceki günlük özetlerin **Takip tablosu** bölümünü ve sohbet geçmişini kullanır. Görev şunları yapar:
+
+- **Takip tablosu:** Fırsatlar Yeni / Görüldü / Aday başvurdu / Yanıt bekleniyor / Kapandı durumlarıyla izlenir. "Başvurdu" yalnızca sen bildirirsen yazılır.
+- **Hatırlatmalar:** Uzun süre yanıtsız kalanlar, kapanmak üzere olan ilanlar, karar verilmemiş güçlü eşleşmeler.
+- **Recruiter gelen kutusu:** Son 2 günün recruiter iletileri salt okunur sınıflandırılır (Acil / Sıcak / Soğuk / Gereksiz); Acil ve Sıcak için yanıt taslağı yalnızca özet e-postasında önerilir. Gmail'de değişiklik, taslak kaydı veya gönderim yapılmaz.
+
+Talimatları güncellediğinde `prompts/` içindeki metni ChatGPT'deki ilgili görevin talimat alanına elle yapıştır.
