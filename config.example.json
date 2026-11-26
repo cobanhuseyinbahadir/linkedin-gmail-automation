@@ -3,6 +3,7 @@
   "enabled": false,
   "recipient_email": "YOUR_EMAIL",
   "candidate_profile": "YOUR_CANDIDATE_PROFILE",
+  "_candidate_profile_hint": "Hedef roller, sektörler, teknolojiler, deneyim yılı, ikamet ve ulaşım tercihi, çalışma modeli (uzaktan/hibrit/ofis). Yalnızca doğrulanmış bilgi yaz; bu dosyayı config.local.json olarak kaydet, GitHub'a yükleme.",
   "tasks": [
     {
       "id": "gmail-cleanup",

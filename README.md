@@ -25,3 +25,7 @@ Reklamlar yalnızca geri alınabilir Çöp Kutusu'na taşınır. Kalıcı silme 
 ## Dışa aktarım kapsamı
 
 Yerel iki otomasyon tanımından kişisel ad, e-posta, ayrıntılı aday geçmişi ve eski tarama sayacı ayıklanmıştır. Sohbet geçmişi, e-posta içerikleri, kimlik bilgileri ve erişim anahtarları dahil değildir. Yerel kaynak tanımlar dışa aktarım sırasında PAUSED durumundaydı; bulutta çalışan görevlerin durumu bu paketten anlaşılamaz. Mevcut görevlerde değişiklik yapılmadı.
+
+## Lisans
+
+MIT. Ayrıntı: `LICENSE`.
