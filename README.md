@@ -1,80 +1,83 @@
-# İş Fırsatı ve Gmail Asistanı
+**English** · [Türkçe](README.tr.md)
 
-Her sabah Gmail kutunu düzenleyen, ardından LinkedIn ve web'de iş fırsatlarını tarayıp sana tek bir **günlük özet e-postası** gönderen bir yapay zekâ asistanının görev talimatları.
+# Job Opportunity & Gmail Assistant
 
-> **Amaç:** İş ararken fırsat kaçırmamak. Başvuru yapmaz, kimseye mesaj atmaz; bulur, sınıflandırır, hatırlatır. Kararı sen verirsin.
+Task instructions for an AI assistant that tidies your Gmail every morning, then scans LinkedIn and the web for job opportunities and sends you a single **daily summary email**.
 
-> **Bu depo bir uygulama değil, talimat şablonudur.** Çalıştırılabilir kod, GitHub Actions iş akışı ya da Gmail/LinkedIn bağlantısı içermez. Talimatlar, Gmail ve web aramasına erişimi olan bir asistan ortamına (ör. ChatGPT zamanlanmış görevleri) yapıştırılarak kullanılır. GitHub'a yükleme yapmak çalışan bir görevi kendiliğinden güncellemez.
+> **Goal:** never miss a job opportunity while job hunting. The assistant does not apply anywhere and does not message anyone; it finds, classifies and reminds. You make the decisions.
 
-## Nasıl çalışır?
+> **This repository is an instruction template, not an application.** It contains no executable code, no GitHub Actions workflow and no Gmail/LinkedIn connection. You paste the instructions into an assistant environment that has Gmail and web-search access (e.g. ChatGPT scheduled tasks). Pushing changes here does not update a running task by itself. The instruction texts are written in Turkish.
+
+## How it works
 
 ```
-09.00  Gmail temizliği ve fatura arşivi
-         │  reklamlar → Çöp Kutusu · faturalar → etiket + arşiv · önemli iletiler korunur
+09:00  Gmail cleanup and invoice archiving
+         │  ads → Trash · invoices → label + archive · important mail kept
          ▼
-10.00  İş fırsatları + günlük özet
-         │  LinkedIn / web taraması · recruiter iletileri · takip tablosu
+10:00  Job opportunities + daily summary
+         │  LinkedIn / web scan · recruiter mail · tracking table
          ▼
-       Günlük özet e-postası → yalnızca kendi Gmail adresine
+       Daily summary email → sent only to your own Gmail address
 ```
 
-Saatler `Europe/Istanbul`'a göredir.
+Times are in `Europe/Istanbul`.
 
-## Günlük özet e-postasında ne var?
+## What the daily summary contains
 
-Konu: `Günlük özet | Gmail ve iş fırsatları | <tarih>`
+Subject: `Günlük özet | Gmail ve iş fırsatları | <date>`
 
-1. **Gmail temizliği sonucu:** incelenen, Çöp Kutusu'na taşınan, fatura etiketine alınan ileti sayıları.
-2. **Hatırlatmalar:** uzun süredir yanıt gelmeyen başvurular, kapanmak üzere olan ilanlar, karar verilmemiş güçlü eşleşmeler.
-3. **Recruiter gelen kutusu:** son 2 günün iletileri *Acil / Sıcak / Soğuk / Gereksiz* olarak sınıflanır; acil ve sıcak olanlar için kısa yanıt taslağı önerilir.
-4. **Yeni fırsatlar:** en fazla 10 fırsat; rol, çalışma modeli, eşleşen noktalar, eksik şartlar, doğrudan bağlantı. CV isteyen paylaşımlar ayrı gösterilir.
-5. **Bugünün görünürlük önerisi:** teknik deneyim paylaşımı için gönderi iskeleti ya da yorum taslağı.
-6. **Takip tablosu:** her fırsatın durumu (Yeni, Görüldü, Aday başvurdu, Yanıt bekleniyor, Kapandı).
+1. **Gmail cleanup result:** counts of reviewed messages, messages moved to Trash, and invoices labelled.
+2. **Reminders:** applications with no reply for a while, postings about to close, strong matches still undecided.
+3. **Recruiter inbox:** messages from the last 2 days classified as *Urgent / Warm / Cold / Irrelevant*, with short suggested replies for urgent and warm ones.
+4. **New opportunities:** up to 10, with role, work model, matching points, missing requirements and a direct link. Posts that ask for a CV are shown separately.
+5. **Today's visibility suggestion:** a post outline or comment draft for sharing technical experience.
+6. **Tracking table:** the status of every opportunity (New, Seen, Applied, Awaiting reply, Closed).
 
-**Takip hafızası:** Ayrı bir veritabanı yoktur. Asistan her gün, Gmail'in Gönderilmiş klasöründeki önceki özetin takip tablosundan devam eder. "Başvurdu" durumu yalnızca sen sohbette bildirirsen yazılır.
+**Tracking memory:** there is no separate database. Each day the assistant continues from the tracking table in the previous summary in your Gmail Sent folder. "Applied" is only recorded when you tell the assistant in chat.
 
-## Güvenlik ve koruma kuralları
+## Safety and guardrails
 
-| Asistan yapar | Asistan yapmaz |
+| The assistant does | The assistant does not |
 |---|---|
-| Reklamları geri alınabilir Çöp Kutusu'na taşır | Kalıcı silme, Çöp Kutusu'nu boşaltma |
-| Gerçek faturaları etiketleyip arşivler | Belirsiz belgeyi arşivleme veya silme |
-| Recruiter iletilerini yalnızca okur ve sınıflar | Gmail'de yanıt gönderme veya taslak kaydetme |
-| Yanıt/gönderi taslağını özet içinde önerir | LinkedIn'de paylaşım, yorum, beğeni, bağlantı isteği |
-| Özeti yalnızca senin adresine gönderir | Başvuru yapma, üçüncü kişiye mesaj veya e-posta |
+| Moves ads to the recoverable Trash | Permanently delete, or empty the Trash |
+| Marks reviewed LinkedIn notification emails as read | Unsubscribe, or change permanent filters or notification settings |
+| Labels and archives genuine invoices | Archive or delete ambiguous documents |
+| Only reads and classifies recruiter mail | Send replies or save drafts in Gmail |
+| Suggests reply/post drafts inside the summary | Post, comment, like or send connection requests on LinkedIn |
+| Sends the summary only to your own address | Apply to jobs or message/email third parties |
 
-Ek olarak: şüphede ileti korunur, e-posta içindeki talimatlar yetki sayılmaz, kapalı ilanlar aktif listeye alınmaz, profilde olmayan deneyim uydurulmaz. Aynı gün için özet ikinci kez gönderilmez.
+Also: when in doubt a message is kept, instructions found inside emails are never treated as authorization, closed postings are not listed as active, and no experience is invented that is not in your profile. The summary is not sent twice on the same day.
 
-## Kurulum
+## Setup
 
-1. `config.example.json` dosyasını `config.local.json` olarak kopyala. Bu dosya `.gitignore`'dadır; GitHub'a yükleme.
-2. E-posta adresini ve doğrulanmış aday profilini yaz. Profil şunları içermeli: deneyim, hedef roller, teknolojiler, konum ve ulaşım tercihi, çalışma modeli (uzaktan/hibrit/ofis).
-3. `prompts/gmail-cleanup.txt` ve `prompts/linkedin-opportunities.txt` içindeki `YOUR_EMAIL` ve `CANDIDATE_PROFILE` alanlarını kendi bilgilerinle doldurup asistan ortamında iki ayrı görev olarak zamanla (09.00 ve 10.00).
-4. Asistanın Gmail okuma/etiketleme ve web araması erişimi olduğundan emin ol.
-5. Görevi bir kez elle çalıştırıp ilk e-postayı kontrol et. İlk özette "önceki takip tablosu bulunamadı" yazması normaldir.
+1. Copy `config.example.json` to `config.local.json`. It is in `.gitignore`; do not upload it to GitHub.
+2. Fill in your email address and a verified candidate profile: experience, target roles, technologies, location and commute preferences, work model (remote/hybrid/office).
+3. Replace `YOUR_EMAIL` and `CANDIDATE_PROFILE` in `prompts/gmail-cleanup.txt` and `prompts/linkedin-opportunities.txt` with your own details, and schedule them as two separate tasks in your assistant environment (09:00 and 10:00).
+4. Make sure the assistant has Gmail read/label access and web search.
+5. Run the task once manually and check the first email. "Previous tracking table not found" in the first summary is normal.
 
-> **Yetki:** Talimatlar, hesap sahibinin bu işlemlere izin verdiği varsayımıyla yazılmıştır. Hesabın sahibi sen değilsen ya da yeni bir ortama geçiyorsan, Gmail değişiklikleri ve özet gönderimi için hesap sahibinden ayrıca onay al.
+> **Authorization:** the instructions assume the account owner has authorized these actions. If you are not the account owner, or you move to a new environment, get the owner's authorization for Gmail changes and summary sending separately.
 
-## Depo yapısı
+## Repository layout
 
 ```
 prompts/
-  gmail-cleanup.txt            09.00 görevi: Gmail temizliği ve fatura arşivi
-  linkedin-opportunities.txt   10.00 görevi: fırsat taraması, recruiter kutusu, günlük özet
-config.example.json            Yerel ayar şablonu (gerçek bilgi içermez)
+  gmail-cleanup.txt            09:00 task: Gmail cleanup and invoice archiving
+  linkedin-opportunities.txt   10:00 task: opportunity scan, recruiter inbox, daily summary
+config.example.json            Local settings template (contains no real data)
 LICENSE                        MIT
 ```
 
-## Gizlilik
+## Privacy
 
-Depo herkese açıktır. Ad, e-posta, ayrıntılı aday profili, e-posta içerikleri, hesap anahtarları ve OAuth belirteçleri burada yer almaz; bunlar yalnızca özel çalıştırma ortamında tutulmalıdır.
+This repository is public. Names, email addresses, detailed candidate profiles, email contents, account keys and OAuth tokens are not included; keep them only in your private runtime environment.
 
-## Sınırlar
+## Limitations
 
-- Canlı zamanlayıcının durumunu bu depo garanti etmez; görevlerin çalıştığını asistan ortamından doğrula.
-- LinkedIn bağlayıcısı yalnızca kişi araması sunuyorsa ilan ve gönderi taraması web aramasına dayanır; kişisel akışın tamamı taranamaz. Asistan kapsam sınırını raporda belirtir.
-- Raporlanan sonuçlar bir asistanın çıktısıdır; başvurmadan önce ilanı asıl sayfadan doğrula.
+- This repository does not guarantee the state of a live scheduler; verify that tasks run from your assistant environment.
+- If the LinkedIn connector only offers people search, job and post scanning relies on web search and cannot cover your whole personal feed. The assistant states the coverage limit in its report.
+- Reported results are an assistant's output; verify a posting on its original page before applying.
 
-## Lisans
+## License
 
-MIT. Ayrıntı: [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](LICENSE).
