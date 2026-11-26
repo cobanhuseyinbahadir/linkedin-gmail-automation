@@ -43,3 +43,12 @@ Talimatları güncellediğinde `prompts/` içindeki metni ChatGPT'deki ilgili g�
 ## Görünürlük önerisi
 
 Günlük özete hedef rollerle ilgili teknik deneyim paylaşımı için küçük bir bölüm eklenir: haftada en fazla bir gönderi iskeleti, diğer günlerde erişilebilen bir gönderiye yorum taslağı. Sistem hiçbir şeyi yayımlamaz; deneyim, sayı veya işverene ait gizli bilgi uydurmaz ya da önermez. Paylaşımı sen yaparsın.
+
+
+## Bulut görevlerinin asıl talimatları
+
+`prompts/gmail-cleanup.txt` ve `prompts/linkedin-opportunities.txt`, 26 Kasım 2026 tarihinde bulut sohbetinin gerçekleşmiş son çalışmalarında kullanılan görev talimatları esas alınarak güncellendi. LinkedIn talimatına kullanıcı tarafından onaylanan takip durumu, hatırlatma, recruiter gelen kutusu ve görünürlük önerisi bölümleri eklendi; günlük özet bölümlerinin sırası güncellendi. Önceki yerel görev şablonları Git geçmişinde bulunur.
+
+Depo herkese açıktır. Bu yüzden ad, e-posta, ayrıntılı aday profili ve kişisel geçmiş işlem sayıları yayımlanmaz. `YOUR_EMAIL` ve `CANDIDATE_PROFILE` alanları özel çalıştırma ortamında doldurulmalıdır. Gerçek e-posta içerikleri, hesap anahtarları veya OAuth belirteçleri bu depoda bulunmaz.
+
+Bu dosyalar, Gmail ve arama araçlarını kullanan bulut asistanının görev tanımlarıdır; uygulamanın veya bulut zamanlayıcısının kaynak kodu değildir. GitHub'a yapılan değişiklikler çalışan görevi otomatik güncellemez. Bulut zamanlayıcısına kayıt işlemi ayrıca doğrulanmalıdır; bu depo canlı zamanlayıcının durumunu garanti etmez.
