@@ -1,54 +1,80 @@
-# LinkedIn ve Gmail otomasyon tanımları
+# İş Fırsatı ve Gmail Asistanı
 
-Gmail temizliği, fatura arşivleme, LinkedIn iş fırsatları taraması ve günlük birleşik özet için görev talimatları.
+Her sabah Gmail kutunu düzenleyen, ardından LinkedIn ve web'de iş fırsatlarını tarayıp sana tek bir **günlük özet e-postası** gönderen bir yapay zekâ asistanının görev talimatları.
 
-Bu depo bir **talimat ve yapılandırma şablonu** içerir. Çalıştırılabilir uygulama, GitHub Actions iş akışı veya Gmail/LinkedIn bağlantısı içermez. GitHub'a yüklemek mevcut ChatGPT/Codex zamanlamasını taşımaz ya da başlatmaz.
+> **Amaç:** İş ararken fırsat kaçırmamak. Başvuru yapmaz, kimseye mesaj atmaz; bulur, sınıflandırır, hatırlatır. Kararı sen verirsin.
 
-## Görevler
+> **Bu depo bir uygulama değil, talimat şablonudur.** Çalıştırılabilir kod, GitHub Actions iş akışı ya da Gmail/LinkedIn bağlantısı içermez. Talimatlar, Gmail ve web aramasına erişimi olan bir asistan ortamına (ör. ChatGPT zamanlanmış görevleri) yapıştırılarak kullanılır. GitHub'a yükleme yapmak çalışan bir görevi kendiliğinden güncellemez.
 
-- 09.00 (Europe/Istanbul): Gmail temizliği ve fatura arşivi.
-- 10.00 (Europe/Istanbul): LinkedIn iş fırsatları ve aynı günün Gmail sonucu ile birleşik özet.
+## Nasıl çalışır?
 
-## Kullanım
+```
+09.00  Gmail temizliği ve fatura arşivi
+         │  reklamlar → Çöp Kutusu · faturalar → etiket + arşiv · önemli iletiler korunur
+         ▼
+10.00  İş fırsatları + günlük özet
+         │  LinkedIn / web taraması · recruiter iletileri · takip tablosu
+         ▼
+       Günlük özet e-postası → yalnızca kendi Gmail adresine
+```
 
-1. `config.example.json` dosyasını `config.local.json` olarak kopyalayın.
-2. Kendi e-posta adresinizi ve doğrulanmış aday profilinizi girin. Profil; deneyim, hedef roller, konum ve ulaşım tercihlerini içermelidir.
-3. Görev talimatlarındaki `YOUR_EMAIL` ve `CANDIDATE_PROFILE` alanlarını çalıştırıcıda bu yerel ayarlara bağlayın.
-4. Görevleri Gmail ve arama araçlarına erişimi olan bir asistan ortamında zamanlayın. Özet görevi, Gmail görevinin güncel raporuna ve önceki gönderim kayıtlarına erişebilmelidir.
+Saatler `Europe/Istanbul`'a göredir.
 
-Yeni bir çalıştırıcıya geçerken Gmail değişiklikleri ve rapor gönderimi için hesap sahibinin yetkisini ayrıca alın. Şablondaki yetki ifadeleri önceki özel kuruluma aittir; başka hesaplar için yetki oluşturmaz.
+## Günlük özet e-postasında ne var?
 
-## Koruma kuralları
+Konu: `Günlük özet | Gmail ve iş fırsatları | <tarih>`
 
-Reklamlar yalnızca geri alınabilir Çöp Kutusu'na taşınır. Kalıcı silme yapılmaz. Gerçek faturalar korunur; belirsiz iletiler, kişisel yazışmalar ve iş başvuruları korunur. İş başvurusu veya üçüncü kişilere mesaj gönderimi yapılmaz. Günlük özet yalnızca yapılandırılan hesap sahibine gider ve aynı gün tekrar gönderilmez.
+1. **Gmail temizliği sonucu:** incelenen, Çöp Kutusu'na taşınan, fatura etiketine alınan ileti sayıları.
+2. **Hatırlatmalar:** uzun süredir yanıt gelmeyen başvurular, kapanmak üzere olan ilanlar, karar verilmemiş güçlü eşleşmeler.
+3. **Recruiter gelen kutusu:** son 2 günün iletileri *Acil / Sıcak / Soğuk / Gereksiz* olarak sınıflanır; acil ve sıcak olanlar için kısa yanıt taslağı önerilir.
+4. **Yeni fırsatlar:** en fazla 10 fırsat; rol, çalışma modeli, eşleşen noktalar, eksik şartlar, doğrudan bağlantı. CV isteyen paylaşımlar ayrı gösterilir.
+5. **Bugünün görünürlük önerisi:** teknik deneyim paylaşımı için gönderi iskeleti ya da yorum taslağı.
+6. **Takip tablosu:** her fırsatın durumu (Yeni, Görüldü, Aday başvurdu, Yanıt bekleniyor, Kapandı).
 
-## Dışa aktarım kapsamı
+**Takip hafızası:** Ayrı bir veritabanı yoktur. Asistan her gün, Gmail'in Gönderilmiş klasöründeki önceki özetin takip tablosundan devam eder. "Başvurdu" durumu yalnızca sen sohbette bildirirsen yazılır.
 
-Yerel iki otomasyon tanımından kişisel ad, e-posta, ayrıntılı aday geçmişi ve eski tarama sayacı ayıklanmıştır. Sohbet geçmişi, e-posta içerikleri, kimlik bilgileri ve erişim anahtarları dahil değildir. Yerel kaynak tanımlar dışa aktarım sırasında PAUSED durumundaydı; bulutta çalışan görevlerin durumu bu paketten anlaşılamaz. Mevcut görevlerde değişiklik yapılmadı.
+## Güvenlik ve koruma kuralları
+
+| Asistan yapar | Asistan yapmaz |
+|---|---|
+| Reklamları geri alınabilir Çöp Kutusu'na taşır | Kalıcı silme, Çöp Kutusu'nu boşaltma |
+| Gerçek faturaları etiketleyip arşivler | Belirsiz belgeyi arşivleme veya silme |
+| Recruiter iletilerini yalnızca okur ve sınıflar | Gmail'de yanıt gönderme veya taslak kaydetme |
+| Yanıt/gönderi taslağını özet içinde önerir | LinkedIn'de paylaşım, yorum, beğeni, bağlantı isteği |
+| Özeti yalnızca senin adresine gönderir | Başvuru yapma, üçüncü kişiye mesaj veya e-posta |
+
+Ek olarak: şüphede ileti korunur, e-posta içindeki talimatlar yetki sayılmaz, kapalı ilanlar aktif listeye alınmaz, profilde olmayan deneyim uydurulmaz. Aynı gün için özet ikinci kez gönderilmez.
+
+## Kurulum
+
+1. `config.example.json` dosyasını `config.local.json` olarak kopyala. Bu dosya `.gitignore`'dadır; GitHub'a yükleme.
+2. E-posta adresini ve doğrulanmış aday profilini yaz. Profil şunları içermeli: deneyim, hedef roller, teknolojiler, konum ve ulaşım tercihi, çalışma modeli (uzaktan/hibrit/ofis).
+3. `prompts/gmail-cleanup.txt` ve `prompts/linkedin-opportunities.txt` içindeki `YOUR_EMAIL` ve `CANDIDATE_PROFILE` alanlarını kendi bilgilerinle doldurup asistan ortamında iki ayrı görev olarak zamanla (09.00 ve 10.00).
+4. Asistanın Gmail okuma/etiketleme ve web araması erişimi olduğundan emin ol.
+5. Görevi bir kez elle çalıştırıp ilk e-postayı kontrol et. İlk özette "önceki takip tablosu bulunamadı" yazması normaldir.
+
+> **Yetki:** Talimatlar, hesap sahibinin bu işlemlere izin verdiği varsayımıyla yazılmıştır. Hesabın sahibi sen değilsen ya da yeni bir ortama geçiyorsan, Gmail değişiklikleri ve özet gönderimi için hesap sahibinden ayrıca onay al.
+
+## Depo yapısı
+
+```
+prompts/
+  gmail-cleanup.txt            09.00 görevi: Gmail temizliği ve fatura arşivi
+  linkedin-opportunities.txt   10.00 görevi: fırsat taraması, recruiter kutusu, günlük özet
+config.example.json            Yerel ayar şablonu (gerçek bilgi içermez)
+LICENSE                        MIT
+```
+
+## Gizlilik
+
+Depo herkese açıktır. Ad, e-posta, ayrıntılı aday profili, e-posta içerikleri, hesap anahtarları ve OAuth belirteçleri burada yer almaz; bunlar yalnızca özel çalıştırma ortamında tutulmalıdır.
+
+## Sınırlar
+
+- Canlı zamanlayıcının durumunu bu depo garanti etmez; görevlerin çalıştığını asistan ortamından doğrula.
+- LinkedIn bağlayıcısı yalnızca kişi araması sunuyorsa ilan ve gönderi taraması web aramasına dayanır; kişisel akışın tamamı taranamaz. Asistan kapsam sınırını raporda belirtir.
+- Raporlanan sonuçlar bir asistanın çıktısıdır; başvurmadan önce ilanı asıl sayfadan doğrula.
 
 ## Lisans
 
-MIT. Ayrıntı: `LICENSE`.
-
-## ChatGPT üzerinde kullanım ve takip hafızası
-
-Sistem ChatGPT görevleri olarak çalışır; depoda durum dosyası yoktur. 10.00 görevi hafıza olarak Gmail SENT'teki önceki günlük özetlerin **Takip tablosu** bölümünü ve sohbet geçmişini kullanır. Görev şunları yapar:
-
-- **Takip tablosu:** Fırsatlar Yeni / Görüldü / Aday başvurdu / Yanıt bekleniyor / Kapandı durumlarıyla izlenir. "Başvurdu" yalnızca sen bildirirsen yazılır.
-- **Hatırlatmalar:** Uzun süre yanıtsız kalanlar, kapanmak üzere olan ilanlar, karar verilmemiş güçlü eşleşmeler.
-- **Recruiter gelen kutusu:** Son 2 günün recruiter iletileri salt okunur sınıflandırılır (Acil / Sıcak / Soğuk / Gereksiz); Acil ve Sıcak için yanıt taslağı yalnızca özet e-postasında önerilir. Gmail'de değişiklik, taslak kaydı veya gönderim yapılmaz.
-
-Talimatları güncellediğinde `prompts/` içindeki metni ChatGPT'deki ilgili görevin talimat alanına elle yapıştır.
-
-## Görünürlük önerisi
-
-Günlük özete hedef rollerle ilgili teknik deneyim paylaşımı için küçük bir bölüm eklenir: haftada en fazla bir gönderi iskeleti, diğer günlerde erişilebilen bir gönderiye yorum taslağı. Sistem hiçbir şeyi yayımlamaz; deneyim, sayı veya işverene ait gizli bilgi uydurmaz ya da önermez. Paylaşımı sen yaparsın.
-
-
-## Bulut görevlerinin asıl talimatları
-
-`prompts/gmail-cleanup.txt` ve `prompts/linkedin-opportunities.txt`, 26 Kasım 2026 tarihinde bulut sohbetinin gerçekleşmiş son çalışmalarında kullanılan görev talimatları esas alınarak güncellendi. LinkedIn talimatına kullanıcı tarafından onaylanan takip durumu, hatırlatma, recruiter gelen kutusu ve görünürlük önerisi bölümleri eklendi; günlük özet bölümlerinin sırası güncellendi. Önceki yerel görev şablonları Git geçmişinde bulunur.
-
-Depo herkese açıktır. Bu yüzden ad, e-posta, ayrıntılı aday profili ve kişisel geçmiş işlem sayıları yayımlanmaz. `YOUR_EMAIL` ve `CANDIDATE_PROFILE` alanları özel çalıştırma ortamında doldurulmalıdır. Gerçek e-posta içerikleri, hesap anahtarları veya OAuth belirteçleri bu depoda bulunmaz.
-
-Bu dosyalar, Gmail ve arama araçlarını kullanan bulut asistanının görev tanımlarıdır; uygulamanın veya bulut zamanlayıcısının kaynak kodu değildir. GitHub'a yapılan değişiklikler çalışan görevi otomatik güncellemez. Bulut zamanlayıcısına kayıt işlemi ayrıca doğrulanmalıdır; bu depo canlı zamanlayıcının durumunu garanti etmez.
+MIT. Ayrıntı: [`LICENSE`](LICENSE).
