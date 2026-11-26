@@ -39,3 +39,7 @@ Sistem ChatGPT görevleri olarak çalışır; depoda durum dosyası yoktur. 10.0
 - **Recruiter gelen kutusu:** Son 2 günün recruiter iletileri salt okunur sınıflandırılır (Acil / Sıcak / Soğuk / Gereksiz); Acil ve Sıcak için yanıt taslağı yalnızca özet e-postasında önerilir. Gmail'de değişiklik, taslak kaydı veya gönderim yapılmaz.
 
 Talimatları güncellediğinde `prompts/` içindeki metni ChatGPT'deki ilgili görevin talimat alanına elle yapıştır.
+
+## Görünürlük önerisi
+
+Günlük özete hedef rollerle ilgili teknik deneyim paylaşımı için küçük bir bölüm eklenir: haftada en fazla bir gönderi iskeleti, diğer günlerde erişilebilen bir gönderiye yorum taslağı. Sistem hiçbir şeyi yayımlamaz; deneyim, sayı veya işverene ait gizli bilgi uydurmaz ya da önermez. Paylaşımı sen yaparsın.
