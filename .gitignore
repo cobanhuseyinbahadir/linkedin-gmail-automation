@@ -1,0 +1,11 @@
+config.local.json
+.env
+.env.*
+!.env.example
+credentials*.json
+token*.json
+*.pem
+*.key
+reports/
+state/
+__pycache__/

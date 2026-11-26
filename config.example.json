@@ -1,0 +1,20 @@
+{
+  "timezone": "Europe/Istanbul",
+  "enabled": false,
+  "recipient_email": "YOUR_EMAIL",
+  "candidate_profile": "YOUR_CANDIDATE_PROFILE",
+  "tasks": [
+    {
+      "id": "gmail-cleanup",
+      "name": "Gmail temizliği ve fatura arşivi",
+      "local_time": "09:00",
+      "prompt_file": "prompts/gmail-cleanup.txt"
+    },
+    {
+      "id": "linkedin-opportunities",
+      "name": "İş ilanları ve CV isteyen paylaşımlar",
+      "local_time": "10:00",
+      "prompt_file": "prompts/linkedin-opportunities.txt"
+    }
+  ]
+}
